@@ -55,6 +55,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="LogInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -62,6 +70,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LogInWindow.xaml.cs">
+      <DependentUpon>LogInWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -86,6 +100,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\Poppins-Medium.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +108,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\295x76B.png" />
+    <Resource Include="Images\AccountB.png" />
+    <Resource Include="Images\BackerBridge.png" />
+    <Resource Include="Images\BackerBridgeMP.png" />
+    <Resource Include="Images\ButtonHaveAccount.png" />
+    <Resource Include="Images\ButtonLogIn.png" />
+    <Resource Include="Images\ButtonNotAccount.png" />
+    <Resource Include="Images\ButtonSignUp.png" />
+    <Resource Include="Images\DashBoardB.png" />
+    <Resource Include="Images\ExpandCalendar.png" />
+    <Resource Include="Images\InsightB.png" />
+    <Resource Include="Images\SettingsB.png" />
+    <Resource Include="Images\ShowPassword.png" />
+    <Resource Include="Images\TextBoxBirthDate.png" />
+    <Resource Include="Images\TextBoxConfirmPassword.png" />
+    <Resource Include="Images\TextBoxEmail.png" />
+    <Resource Include="Images\TextBoxFirstName.png" />
+    <Resource Include="Images\TextBoxLastName.png" />
+    <Resource Include="Images\TextBoxPassword.png" />
+    <Resource Include="Images\TransactionB.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
