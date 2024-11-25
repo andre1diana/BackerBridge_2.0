@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34723.18
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackerBridge_2.0", "BackerBridge_2.0\BackerBridge_2.0.csproj", "{21884705-5D3B-4229-B964-4E24155C83C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21884705-5D3B-4229-B964-4E24155C83C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21884705-5D3B-4229-B964-4E24155C83C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21884705-5D3B-4229-B964-4E24155C83C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21884705-5D3B-4229-B964-4E24155C83C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C305426-DFE1-4753-8C4A-957CE8D9C38B}
+	EndGlobalSection
+EndGlobal
