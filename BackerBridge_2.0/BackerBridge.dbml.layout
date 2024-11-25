@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="BackerBridge">
+  <DataContextMoniker Name="/BackerBridgeDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c6e64e83-4334-430b-a0c9-026acb2bff45" absoluteBounds="6.25, 1.375, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/BackerBridgeDataContext/Campaign" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f0ed96a4-318e-4375-af7f-ba23de045987" absoluteBounds="6.265, 1.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f0a2b76d-d32d-4b8a-bd27-0bfa59aa51ae" absoluteBounds="3.5, 2.75, 2, 1.7708968098958326">
+      <DataClassMoniker Name="/BackerBridgeDataContext/Company" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ca252b60-5e8d-4ca9-a329-c95f79c9a719" absoluteBounds="3.515, 3.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9e0645c3-f118-431d-87fa-de5dde562836" absoluteBounds="3.5, 5.25, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/BackerBridgeDataContext/Donation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a94e76ed-3cdb-44fb-97fd-8c9607551de5" absoluteBounds="3.515, 5.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="118927aa-2e3d-40f5-a66f-878cb8db3bec" absoluteBounds="6.25, 5.25, 2, 1.9631982421875005">
+      <DataClassMoniker Name="/BackerBridgeDataContext/Payment" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6a1d22d1-ce76-4fe4-b5ff-63d4c1f36acd" absoluteBounds="6.265, 5.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="51e96f16-eebc-46e8-b738-dc723f851756" absoluteBounds="0.75, 3.75, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/BackerBridgeDataContext/User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c6d2a84b-81d1-452b-bc7d-f75a3c4e7ab4" absoluteBounds="0.765, 4.21, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5 : 3.23640055338542); (6.25 : 3.23640055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BackerBridgeDataContext/Company/Company_Campaign" />
+      <nodes>
+        <classShapeMoniker Id="f0a2b76d-d32d-4b8a-bd27-0bfa59aa51ae" />
+        <classShapeMoniker Id="c6e64e83-4334-430b-a0c9-026acb2bff45" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 6.23159912109375); (6.25 : 6.23159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BackerBridgeDataContext/Donation/Donation_Payment" />
+      <nodes>
+        <classShapeMoniker Id="9e0645c3-f118-431d-87fa-de5dde562836" />
+        <classShapeMoniker Id="118927aa-2e3d-40f5-a66f-878cb8db3bec" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 3.75); (1.75 : 2.03125); (6.25 : 2.03125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BackerBridgeDataContext/User/User_Campaign" />
+      <nodes>
+        <classShapeMoniker Id="51e96f16-eebc-46e8-b738-dc723f851756" />
+        <classShapeMoniker Id="c6e64e83-4334-430b-a0c9-026acb2bff45" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.13544840494792); (3.5 : 4.13544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BackerBridgeDataContext/User/User_Company" />
+      <nodes>
+        <classShapeMoniker Id="51e96f16-eebc-46e8-b738-dc723f851756" />
+        <classShapeMoniker Id="f0a2b76d-d32d-4b8a-bd27-0bfa59aa51ae" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.77005126953125); (3.5 : 5.77005126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/BackerBridgeDataContext/User/User_Donation" />
+      <nodes>
+        <classShapeMoniker Id="51e96f16-eebc-46e8-b738-dc723f851756" />
+        <classShapeMoniker Id="9e0645c3-f118-431d-87fa-de5dde562836" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

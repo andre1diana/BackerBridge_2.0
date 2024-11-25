@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BackerBridge" Class="BackerBridgeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-K4S8L57\SQLEXPRESS;Initial Catalog=BackerBridge;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="BackerBridge_2._0.Properties.Settings" SettingsPropertyName="BackerBridgeConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Campaign" Member="Campaigns">
+    <Type Name="Campaign">
+      <Column Name="CampaignID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CampaignName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectDescription" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="GoalAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CurrentAmount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CampaignStatus" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Company_Campaign" Member="Company" ThisKey="CompanyID" OtherKey="CompanyID" Type="Company" IsForeignKey="true" />
+      <Association Name="User_Campaign" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Companies" Member="Companies">
+    <Type Name="Company">
+      <Column Name="CompanyID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyEmail" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyAddress" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Company_Campaign" Member="Campaigns" ThisKey="CompanyID" OtherKey="CompanyID" Type="Campaign" />
+      <Association Name="User_Company" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Donations" Member="Donations">
+    <Type Name="Donation">
+      <Column Name="DonationID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DonationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DonationMessage" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="DonationStatus" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DonationType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Donation_Payment" Member="Payments" ThisKey="DonationID" OtherKey="DonationID" Type="Payment" />
+      <Association Name="User_Donation" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payments" Member="Payments">
+    <Type Name="Payment">
+      <Column Name="PaymentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DonationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentMethod" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentStatus" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="Donation_Payment" Member="Donation" ThisKey="DonationID" OtherKey="DonationID" Type="Donation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="UserAddress" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="BirthDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="UserPassword" Type="System.Data.Linq.Binary" DbType="Binary(64) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Salt" Type="System.Data.Linq.Binary" DbType="Binary(20) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="User_Campaign" Member="Campaigns" ThisKey="UserID" OtherKey="UserID" Type="Campaign" />
+      <Association Name="User_Company" Member="Companies" ThisKey="UserID" OtherKey="UserID" Type="Company" />
+      <Association Name="User_Donation" Member="Donations" ThisKey="UserID" OtherKey="UserID" Type="Donation" />
+    </Type>
+  </Table>
+</Database>

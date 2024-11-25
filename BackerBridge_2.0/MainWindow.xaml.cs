@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BackerBridge_2._0;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -122,41 +123,34 @@ namespace Donator
             objLogInWindow.Show();
         }
 
-        //private void validateEmail(BackerBridgeDataContext data)
-        //{
-
-        //}
-
         private void btSignUp_Click(object sender, RoutedEventArgs e)
         {
-            // TODO adauga in baza de date utilizatorul
-            //BackerBridgeDataContext data = new BackerBridgeDataContext();
-            //if (this.tbEmail.Text == "Your Email")
-            //{
-            //    this.LbMessage.Content = "Please introduce a valid email";
-            //    return;
-            //}
+            //TODO adauga in baza de date utilizatorul
+            BackerBridgeDataContext data = new BackerBridgeDataContext();        
+            if (this.tbEmail.Text == "Your Email")
+            {
+                this.LbMessage.Content = "Please introduce a valid email";
+                return;
+            }
 
-            //var emails = from user1 in data.Users
-            //             select new { user1.Email };
+            var emails = from user1 in data.Users
+                         select new { user1.Email };
 
-            //foreach (var email in emails)
-            //{
-            //    if (email.Email == this.tbEmail.Text)
-            //    {
-            //        this.LbMessage.Content = "A user with this email address already exists!";
-            //        return;
-            //    }
-            //}
-            //validateEmail(data);
+            foreach (var email in emails)
+            {
+                if (email.Email == this.tbEmail.Text)
+                {
+                    this.LbMessage.Content = "A user with this email address already exists!";
+                    return;
+                }
+            }
+            if (this.tbFirstName.Text != null && this.tbLastName.Text != null)
+            {
+                if (this.tbPassword == this.tbConfirmPassword)
+                {
 
-            //if (this.tbFirstName.Text != null && this.tbLastName.Text != null)
-            //{
-            //    if (this.tbPassword == this.tbConfirmPassword)
-            //    {
-
-            //    }
-            //}
+                }
+            }
             //UserClass user = new UserClass();
             //user.lastName = tbLastName.Text;
             //user.firstName = tbFirstName.Text;
@@ -164,7 +158,7 @@ namespace Donator
             //user.password = tbPassword.Password;
             //user.birthday = dpBirthDate.SelectedDate;
 
-            //Console.WriteLine($"{tbPassword.Password.GetHashCode()}");
+            Console.WriteLine($"{tbPassword.Password.GetHashCode()}");
 
             MainPage objMainPage = new MainPage();
             this.Close();
