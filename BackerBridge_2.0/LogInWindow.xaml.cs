@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -66,9 +68,46 @@ namespace Donator
 
         private void btLogIn_Click(object sender, RoutedEventArgs e)
         {
-            MainPage objMainPage = new MainPage();
-            this.Close();
-            objMainPage.Show();
+            string email = tbEmail.Text.Trim();
+            string password = tbPassword.Password;
+
+            using (var context = new BackerBridgeDataContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.Email == email);
+
+                if (user == null)
+                {
+                    LbMessage.Content = "Invalid email or password";
+                    return;
+                }
+
+                //byte[] computedHash = ComputePasswordHash(password, user.Salt.ToArray());
+
+                //if (!computedHash.SequenceEqual(user.UserPassword.ToArray()))
+                if (tbPassword.GetHashCode().ToString() != user.UserPassword.ToString())
+                {
+                    LbMessage.Content = "Invalid email or password";
+                    return;
+                }
+
+                MessageBox.Show("Login successful!", "Success",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+
+                new MainPage().Show();
+                this.Close();
+            }
         }
+
+        private byte[] ComputePasswordHash(string password, byte[] salt)
+        {
+            using (var pbkdf2 = new Rfc2898DeriveBytes(
+                Encoding.UTF8.GetBytes(password),
+                salt,
+                iterations: 10000))
+            {
+                return pbkdf2.GetBytes(64); // matches binary(64) in your schema
+            }
+        }
+
     }
 }

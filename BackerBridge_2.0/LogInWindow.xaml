@@ -169,6 +169,7 @@
                        />
             </Button>
         </Border>
+        <Label x:Name="LbMessage" Content="" HorizontalAlignment="Left" Margin="61,10,0,0" Grid.Row="5" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="320" Foreground="#FF942222" FontFamily="Gadugi"/>
 
     </Grid>
 </Window>

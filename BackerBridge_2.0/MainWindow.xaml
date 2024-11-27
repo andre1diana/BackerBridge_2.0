@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Donator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="730" Width="1080"
+        Title="SignUp" Height="730" Width="1080"
         ResizeMode="CanMinimize"
         SizeToContent="Manual"
         SizeChanged="Window_SizeChanged"
