@@ -148,15 +148,11 @@ namespace Donator
             }
             Console.WriteLine($"Total sum : {validationSum}/6");
 
-            var emails = from U in data.Users
-                         select U.Email;
-            foreach (var email in emails)
+
+            if(data.Users.Any(u => u.Email == this.tbEmail.Text))
             {
-                if (email == this.tbEmail.Text)
-                {
-                    LbMessage.Content = "User with this email already exists!";
-                    return;
-                }
+                LbMessage.Content = "User with this email already exists!";
+                return;
             }
 
             if (validationSum == 6)
@@ -164,7 +160,7 @@ namespace Donator
                 try
                 {
                     byte[] salt = GenerateSalt();
-                    //byte[] hashedPassword = HashPasswordWithSalt(tbPassword.Password, salt);
+                    byte[] hashedPassword = HashPassword(this.tbPassword.ToString(), salt);
 
                     User newUser = new User
                     {
@@ -175,7 +171,7 @@ namespace Donator
                         //UserAddress = tbAddress.Text,
                         BirthDate = DateTime.Parse(tbBirthDate.Text),
                         UserType = "donor",
-                        UserPassword = new System.Data.Linq.Binary(BitConverter.GetBytes(tbPassword.GetHashCode())),
+                        UserPassword = hashedPassword,
                         Salt = salt
                     };
 
@@ -198,31 +194,26 @@ namespace Donator
             }
         }
 
-        private byte[] GenerateSalt()
+        private byte[] GenerateSalt(int length = 16)
         {
             using (var rng = new RNGCryptoServiceProvider())
             {
-                byte[] salt = new byte[20];
+                byte[] salt = new byte[length];
                 rng.GetBytes(salt);
                 return salt;
             }
         }
 
-        private byte[] HashPasswordWithSalt(string password, byte[] salt)
+        private byte[] HashPassword(string password, byte[] salt)
         {
-                //using (var sha256 = SHA256.Create())
-                //{
-                //    byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-                //    byte[] passwordWithSalt = new byte[passwordBytes.Length + salt.Length];
-
-                //    Buffer.BlockCopy(passwordBytes, 0, passwordWithSalt, 0, passwordBytes.Length);
-                //    Buffer.BlockCopy(salt, 0, passwordWithSalt, passwordBytes.Length, salt.Length);
-
-                //    return sha256.ComputeHash(passwordWithSalt);
-                //}
-                //byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-                //return passwordBytes.GetHashCode();
-                return null;
+            using (var pbkdf2 = new Rfc2898DeriveBytes(
+                Encoding.UTF8.GetBytes(password),
+                salt,
+                iterations: 10000,
+                HashAlgorithmName.SHA256))
+            {
+                return pbkdf2.GetBytes(64); // 64 bytes (512 bits) hash
+            }
         }
 
 

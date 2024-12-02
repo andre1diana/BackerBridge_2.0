@@ -80,11 +80,14 @@ namespace Donator
                     LbMessage.Content = "Invalid email or password";
                     return;
                 }
+                byte[] saltBytes = user.Salt.ToArray();
+                byte[] userPassword = user.UserPassword.ToArray();  
+                byte[] computedHash = HashPassword(password, saltBytes);
 
-                //byte[] computedHash = ComputePasswordHash(password, user.Salt.ToArray());
+                Console.WriteLine(userPassword);
+                Console.WriteLine(computedHash);
 
-                //if (!computedHash.SequenceEqual(user.UserPassword.ToArray()))
-                if (tbPassword.GetHashCode().ToString() != user.UserPassword.ToString())
+                if (!computedHash.SequenceEqual(userPassword))
                 {
                     LbMessage.Content = "Invalid email or password";
                     return;
@@ -98,14 +101,16 @@ namespace Donator
             }
         }
 
-        private byte[] ComputePasswordHash(string password, byte[] salt)
+
+        private byte[] HashPassword(string password, byte[] salt)
         {
             using (var pbkdf2 = new Rfc2898DeriveBytes(
                 Encoding.UTF8.GetBytes(password),
                 salt,
-                iterations: 10000))
+                iterations: 10000,
+                HashAlgorithmName.SHA256))
             {
-                return pbkdf2.GetBytes(64); // matches binary(64) in your schema
+                return pbkdf2.GetBytes(64); // 64 bytes (512 bits) hash
             }
         }
 
