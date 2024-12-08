@@ -77,18 +77,20 @@ namespace Donator
 
                 if (user == null)
                 {
+                    Console.WriteLine("Email not ok");
                     LbMessage.Content = "Invalid email or password";
                     return;
                 }
-                byte[] saltBytes = user.Salt.ToArray();
                 byte[] userPassword = user.UserPassword.ToArray();  
-                byte[] computedHash = HashPassword(password, saltBytes);
+                byte[] computedHash = HashPassword(password);
 
-                Console.WriteLine(userPassword);
-                Console.WriteLine(computedHash);
+                Console.WriteLine(userPassword.ToString());
+                Console.WriteLine(computedHash.ToString());
 
                 if (!computedHash.SequenceEqual(userPassword))
                 {
+                    Console.WriteLine("Password not ok");
+
                     LbMessage.Content = "Invalid email or password";
                     return;
                 }
@@ -102,15 +104,12 @@ namespace Donator
         }
 
 
-        private byte[] HashPassword(string password, byte[] salt)
+        private byte[] HashPassword(string password)
         {
-            using (var pbkdf2 = new Rfc2898DeriveBytes(
-                Encoding.UTF8.GetBytes(password),
-                salt,
-                iterations: 10000,
-                HashAlgorithmName.SHA256))
+            using (SHA256 sha256Hash = SHA256.Create())
             {
-                return pbkdf2.GetBytes(64); // 64 bytes (512 bits) hash
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return bytes;
             }
         }
 

@@ -136,6 +136,7 @@ namespace Donator
 
         private void btSignUp_Click(object sender, RoutedEventArgs e)
         {
+            //TODO : verifica data nasterii (acces denied under 18y)
             LbMessage.Content = string.Empty;
             BackerBridgeDataContext data = new BackerBridgeDataContext();
 
@@ -159,8 +160,8 @@ namespace Donator
             {
                 try
                 {
-                    byte[] salt = GenerateSalt();
-                    byte[] hashedPassword = HashPassword(this.tbPassword.ToString(), salt);
+                    //byte[] salt = GenerateSalt();
+                    byte[] hashedPassword = HashPassword(this.tbPassword.ToString());
 
                     User newUser = new User
                     {
@@ -172,7 +173,7 @@ namespace Donator
                         BirthDate = DateTime.Parse(tbBirthDate.Text),
                         UserType = "donor",
                         UserPassword = hashedPassword,
-                        Salt = salt
+                        Salt = null
                     };
 
                     data.Users.InsertOnSubmit(newUser);
@@ -204,18 +205,14 @@ namespace Donator
             }
         }
 
-        private byte[] HashPassword(string password, byte[] salt)
+        private byte[] HashPassword(string password)
         {
-            using (var pbkdf2 = new Rfc2898DeriveBytes(
-                Encoding.UTF8.GetBytes(password),
-                salt,
-                iterations: 10000,
-                HashAlgorithmName.SHA256))
+            using (SHA256 sha256Hash = SHA256.Create())
             {
-                return pbkdf2.GetBytes(64); // 64 bytes (512 bits) hash
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return bytes;
             }
         }
-
 
         private void dpBirthDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
